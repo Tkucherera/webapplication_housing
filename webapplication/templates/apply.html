@@ -1,0 +1,185 @@
+{% load static %}
+{% load bootstrap %}
+{% static "images" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="telusko template project">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/bootstrap4/bootstrap.min.css' %}">
+	<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'CSS/main_styles.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'CSS/responsive.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/accounts.css' %}">
+
+    <title>apply</title>
+</head>
+<body style="background-color:midnightblue;">
+<div class="super_container">
+{% block content %}
+<nav>
+<ul>
+    {% if user.is_authenticated %}
+    <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'logout' %}">Logout</a></li>
+    <li><a href="{% url 'searchroom' %}">search room</a></li>
+        <li><a>Welcome {{user.username}}</a></li>
+    {% else%}
+  <li><a href="{% url 'home' %}">Home</a></li>
+  <li><a href="{% url 'login' %}">Login</a></li>
+  <li><a href="{% url 'register' %}">register</a></li>
+
+    {% endif %}
+</ul>
+</nav>
+
+
+{% if info == 'J' %}
+	<!-- Residences -->
+<div>
+<div class="destinations" id="destinations">
+			<div class="container">
+				<div class="row">
+					<div class="col text-center">
+						<div class="section_subtitle">Falcons</div>
+						<div class="section_title">
+							<h2>Our Residences</h2>
+                            <h5>These are the residences you can apply too</h5>
+						</div>
+					</div>
+				</div>
+				<div class="row destinations_row">
+					<div class="col">
+						<div class="destinations_container item_grid">
+
+							{% for residence in residences %}
+                                {% for user in userinfo %}
+                                        {% if residence.classification != user.classification %}
+                                            {% if residence.sex == user.sex or residence.sex == 'All' %}
+							<!-- Residence hall -->
+							<div class="destination item">
+								<div class="destination_image">
+									<img src="{{residence.img.url}}" alt="" width="600" height="300">
+
+								</div>
+								<div class="destination_content">
+									<div class="destination_title"><a href="destinations.html">{{residence.name}}</a>
+									</div>
+									<div class="destination_subtitle">
+										<p>{{residence.desc}}</p>
+									</div>
+									<div class="destination_price">From ${{residence.price}}</div>
+								</div>
+							</div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+							{% endfor %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+
+{% else %}
+
+<form action="{% url 'apply' %}" method = 'POST' style="border:1px solid #ccc" onsubmit="someFunction(this);return false">
+  <div id="container">
+    <h1>{{school}} housing Information</h1>
+    <h5>Looks Like you are a first time user- No worries! we will need a little information before proceeding</h5>
+    <hr>
+     {% csrf_token %}
+      <div id ="taken">
+        {% for message in messages %}
+          <p> {{message}} </p>
+        {% endfor %}
+      </div>
+
+
+    <div>
+    <label for="classification"><b>classification...</b></label>
+    <input list="class" id="classification" name="classification" multiple="multiple" required>
+    <datalist id="class">
+        <option value="Freshman">Freshman</option>
+        <option value="Sophomore">Sophomore</option>
+        <option value="Junior">Junior</option>
+        <option value="Senior">Senior</option>
+    </datalist>
+    </div>
+    <div>
+    <label for="sex"><b>Sex....................</b></label>
+    <input list="sexes" id="sex" name="sex" multiple="multiple" required>
+    <datalist id="sexes">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </datalist>
+    </div>
+    <div id="access">
+    <label for="sport"><b>Athlete..............</b></label>
+    <input list="sports" id="sport" name="sport" multiple="multiple" style="width: 100px;" required>
+    <datalist id="sports">
+        <option value="Football">Football</option>
+        <option value="Track&Field">Track&Field</option>
+        <option value="Basketball">Basketball</option>
+        <option value="Volleyball">Volleyball</option>
+        <option value="Softball">Softball</option>
+        <option value="Bowling">Bowling</option>
+        <option value="Cycling">Cycling</option>
+        <option value="Golf">Golf</option>
+        <option value="Other">Other</option>
+    </datalist>
+    </div>
+
+
+ <div>
+    <label for="honors"><b>Honors College</b></label>
+    <input type="text" placeholder="No" name="honors" required>
+
+     <label for="gpa"><b>Cumulative GPA</b></label>
+    <input type="number" placeholder="Enter GPA" name="gpa" required>
+
+    <label for="age"><b>Age</b></label>
+    <input type="number" placeholder="Enter your Age" name="age" required>
+
+
+</div>
+
+
+    <p>By entering your information you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+    <div class="clearfix">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" class="submit">Submit</button>
+    </div>
+  </div>
+</form>
+
+ {% endif %}
+{% endblock %}
+
+    <footer>
+   <div>
+        <p class="copyright">&copy; Copyright 2021  Tinashe Kucherera</p>
+  </div>
+</footer>
+</div>
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'CSS/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'CSS/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+
+</html>
