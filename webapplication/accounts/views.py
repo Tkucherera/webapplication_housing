@@ -27,7 +27,6 @@ def register(request):
 
 
 def login(request):
-
     if request.method == 'POST':
         password = request.POST['password']
         username = request.POST['username']

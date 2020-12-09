@@ -3,23 +3,21 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.apps import apps
 
+rooms = apps.get_model('housing', 'Rooms')
 
 def searchroom(request):
     if request.method == 'GET':
         query_residence = str(request.GET.get('residence'))
         query_suite = request.GET.get('suit_num')
         query_room_letter = request.GET.get('room_letter')
-        rooms = apps.get_model('housing', 'Rooms')
         residence = apps.get_model('housing', 'Residence')
 
         submitbutton = request.GET.get('submit')
 
         if query_suite is not None:
-            lookups = Q(suit_num__icontains=query_suite) | Q(room_letter__icontains=query_room_letter)
-            lookup = Q(name__icontains=query_residence)
+            lookups = Q(suit_num__icontains=query_suite)
             results = rooms.objects.filter(lookups).distinct()
-            houses = residence.objects.filter(lookup)
-            context = {'houses' :houses, 'results': results,
+            context = {'results': results,
                      'submitbutton': submitbutton}
 
             return render(request, 'searchroom.html', context)
@@ -29,4 +27,12 @@ def searchroom(request):
 
     else:
         return render(request, 'searchroom.html')
+
+
+def reserveroom(request):
+    if request.method == 'POST':
+        room_taken=rooms.objects.filter(availability=request.availability).update(level=False)
+        room_taken.save()
+        return render(request, 'searchroom.html')
+
 
