@@ -89,12 +89,14 @@ def apply(request):
 def thank_you(request):
     if request.method == 'POST':
         user = request.user.id
+        reserve_room = request.POST['reserve']
         if User.objects.filter(id=user).exists():
             messages.info(request, 'Your Already have a Room Reserved')
-            return redirect('thank_you')
-        reserve_room = request.POST['reserve']
-        Rooms.objects.filter(id=reserve_room).update(Availability=False, occupant=user)
+            return render(request, 'thank_you.html')
 
-    return render(request, 'thank_you.html')
+        Rooms.objects.filter(id=reserve_room).update(Availability=False, occupant=user)
+        return render(request, 'thank_you.html')
+
+
 
 
