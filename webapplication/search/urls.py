@@ -4,7 +4,6 @@ from . import views
 
 urlpatterns = [
      path('searchroom', views.searchroom, name='searchroom'), path('searchroom', views.reserveroom, name='searchroom'),
-
 ]
 
 

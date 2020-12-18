@@ -10,7 +10,7 @@ def register(request):
         email = request.POST['email']
         password = request.POST['password']
         username = request.POST['username']
-        studentid = request.POST['student-id']
+        #studentid = request.POST['student-id']
 
         if User.objects.filter(email=email).exists():
             messages.info(request, 'Email taken')

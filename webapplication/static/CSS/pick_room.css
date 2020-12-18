@@ -1,0 +1,101 @@
+
+#pickroom {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#pickroom td, #pickroom th {
+  border: 1px solid #ddd;
+  padding: 8px;
+
+}
+
+#pickroom tr:nth-child(even){
+    background-color: #f2f2f2;
+    }
+
+#pickroom tr:hover {
+    background-color: #ddd;
+    }
+
+#pickroom th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: midnightblue;
+  color: white;
+}
+
+
+
+/* Create four equal columns that floats next to each other */
+.column1,.column2,.column3 {
+  float: left;
+  width: 31.6%;
+  padding: 10px;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* the table that actually has data*/
+
+#troom {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#troom td, #room th {
+  border: 1px solid #ddd;
+  padding: 3px;
+  width: 33.3%;
+
+}
+
+#troom tr:nth-child(even){
+    background-color: #f2f2f2;
+    }
+
+#troom tr:hover {
+    background-color: #ddd;
+    }
+
+#troom th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: midnightblue;
+  color: white;
+}
+
+.applybutton {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.applybutton1 {
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+}
+
+.applybutton1:hover {
+  background-color: #000000;
+  color: white;
+}

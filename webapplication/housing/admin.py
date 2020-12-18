@@ -6,6 +6,7 @@ admin.site.register(Residence)
 admin.site.register(Rooms)
 admin.site.register(Floors)
 admin.site.register(UserInfo)
+admin.site.register(MySlide)
 
 
 

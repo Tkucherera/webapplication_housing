@@ -39,18 +39,23 @@ class Rooms(models.Model):
     sport = models.TextField(blank=True)
     staff = models.BooleanField(blank=True)
     Eligibility3 = models.TextField(blank=True)
+    occupant = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
 
 class UserInfo(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     classification = models.TextField()
     sex = models.TextField()
-    sport = models.TextField()
+    sport = models.TextField(blank=True)
     honors = models.TextField()
     age = models.IntegerField()
     gpa = models.DecimalField(max_digits=3, decimal_places=2)
 
 
+class MySlide(models.Model):
+    name = models.CharField(max_length=100)
+    img = models.ImageField(upload_to='pics')
+    description = models.TextField()
 
 
 

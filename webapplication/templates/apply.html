@@ -26,9 +26,9 @@
 <ul>
     {% if user.is_authenticated %}
     <li><a href="{% url 'home' %}">Home</a></li>
-      <li><a href="{% url 'logout' %}">Logout</a></li>
+    <li><a href="{% url 'logout' %}">Logout</a></li>
     <li><a href="{% url 'searchroom' %}">search room</a></li>
-        <li><a>Welcome {{user.username}}</a></li>
+        <li><a href="#">Welcome {{user.username}}</a></li>
     {% else%}
   <li><a href="{% url 'home' %}">Home</a></li>
   <li><a href="{% url 'login' %}">Login</a></li>
@@ -37,8 +37,14 @@
     {% endif %}
 </ul>
 </nav>
-
-
+    {% if user.is_authenticated %}
+<div id="wrapper">
+    <form action="{% url 'pick_room' %}">
+        <button type="submit" class="applybutton applybutton1" >Pick Room</button>
+        <button type="submit" formaction="{% url 'searchroom' %}" class="applybutton applybutton1" >Search Room</button>
+    </form>
+</div>
+    {% endif %}
 {% if info == 'J' %}
 	<!-- Residences -->
 <div>
@@ -59,8 +65,8 @@
 
 							{% for residence in residences %}
                                 {% for user in userinfo %}
-                                        {% if residence.classification != user.classification %}
-                                            {% if residence.sex == user.sex or residence.sex == 'All' %}
+                                        {% if residence.classification == None or residence.classification != user.classification  %}
+                                            {% if residence.sex == user.sex or residence.sex == None %}
 							<!-- Residence hall -->
 							<div class="destination item">
 								<div class="destination_image">
@@ -68,7 +74,7 @@
 
 								</div>
 								<div class="destination_content">
-									<div class="destination_title"><a href="destinations.html">{{residence.name}}</a>
+									<div class="destination_title"><a href="{% url 'pick_room' %}">{{residence.name}}</a>
 									</div>
 									<div class="destination_subtitle">
 										<p>{{residence.desc}}</p>
@@ -143,7 +149,7 @@
     <input type="text" placeholder="No" name="honors" required>
 
      <label for="gpa"><b>Cumulative GPA</b></label>
-    <input type="number" placeholder="Enter GPA" name="gpa" required>
+    <input type="number" step="0.01" placeholder="Enter GPA" name="gpa" required>
 
     <label for="age"><b>Age</b></label>
     <input type="number" placeholder="Enter your Age" name="age" required>

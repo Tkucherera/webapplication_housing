@@ -3,8 +3,7 @@ from .models import *
 from django.contrib.auth.models import User, auth
 from django.db.models import Q
 from .filters import *
-from django.views.generic import TemplateView, ListView
-import os
+from django.contrib import messages
 
 
 def home(request):
@@ -40,6 +39,18 @@ def residence(request):
     return render(request, 'Residences.html')
 
 
+def pick_room(request):
+    first = Q(floor__floor__contains=1)
+    second = Q(floor__floor__contains=2)
+    third = Q(floor__floor__contains=3)
+    first_rooms = Rooms.objects.filter(first)
+    second_rooms = Rooms.objects.filter(second)
+    third_rooms = Rooms.objects.filter(third)
+    results = {'first_rooms': first_rooms, 'second_rooms': second_rooms, 'third_rooms': third_rooms}
+
+    return render(request, 'pickroom.html', results)
+
+
 def apply(request):
     # this is supposed to filter the residences that a student can apply to
     def show_residences():
@@ -59,9 +70,8 @@ def apply(request):
                     usersinfo = UserInfo.objects.all
                     return render(request, 'apply.html', {'residences': residences, 'info': info, 'userinfo': usersinfo})
 
-
     if request.method == 'POST':
-        #user = request.user.username
+        username = request.user.get_username()
         classification = request.POST['classification']
         sex = request.POST['sex']
         gpa = request.POST['gpa']
@@ -69,15 +79,22 @@ def apply(request):
         honors = request.POST['honors']
         age = request.POST['age']
 
-        user = UserInfo(classification=classification, sex=sex, gpa=gpa, sport=sport, honors=honors, age=age, User=user)
+        user = UserInfo(classification=classification, sex=sex, gpa=gpa, sport=sport, honors=honors, age=age, username=username)
         user.save()
         return redirect('apply')
     else:
         return render(request, 'apply.html', {'info': info})
 
 
+def thank_you(request):
+    if request.method == 'POST':
+        user = request.user.id
+        if User.objects.filter(id=user).exists():
+            messages.info(request, 'Your Already have a Room Reserved')
+            return redirect('thank_you')
+        reserve_room = request.POST['reserve']
+        Rooms.objects.filter(id=reserve_room).update(Availability=False, occupant=user)
 
-
-
+    return render(request, 'thank_you.html')
 
 
