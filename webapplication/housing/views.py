@@ -90,18 +90,17 @@ def apply(request):
 
     # checking if the current user has information in the userinfo table
     info = 'False'
+    user = request.user
+    user_id = user.id
     if request.user.is_authenticated:
-        current_user = str(request.user.get_username())
-        for username in User.objects.all():
-            if username.userinfo_set.all().exists():
-                if str(username) == current_user:
-                    info = 'J'
-                    residences = Residence.objects.all
-                    usersinfo = UserInfo.objects.all
-                    return render(request, 'apply.html', {'residences': residences, 'info': info, 'userinfo': usersinfo})
+        if UserInfo.objects.filter(user=user_id).exists():
+            info = 'J'
+            residences = Residence.objects.all
+            usersinfo = UserInfo.objects.get(id=user_id)
+            return render(request, 'apply.html', {'residences': residences, 'info': info, 'userinfo': usersinfo})
 
+    #when user inputs data for userinfor table
     if request.method == 'POST':
-        username = request.user.get_username()
         classification = request.POST['classification']
         sex = request.POST['sex']
         gpa = request.POST['gpa']
@@ -109,7 +108,7 @@ def apply(request):
         honors = request.POST['honors']
         age = request.POST['age']
 
-        user = UserInfo(classification=classification, sex=sex, gpa=gpa, sport=sport, honors=honors, age=age, username=username)
+        user = UserInfo(classification=classification, sex=sex, gpa=gpa, sport=sport, honors=honors, age=age, user_id=user_id)
         user.save()
         return redirect('apply')
     else:
@@ -121,7 +120,7 @@ def thank_you(request):
         user = request.user.id
         reserve_room = request.POST['reserve']
         #checking if user has room already reserved
-        if Rooms.objects.filter(id=user).exists():
+        if Rooms.objects.filter(occupant=user).exists():
             messages.info(request, 'Your Already have a Room Reserved')
             return render(request, 'thank_you.html')
 

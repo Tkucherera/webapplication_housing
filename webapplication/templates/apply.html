@@ -38,14 +38,15 @@
 </ul>
 </nav>
     {% if user.is_authenticated %}
-<div id="wrapper">
+
+
+{% if info == 'J' %}
+    <div id="wrapper">
     <form action="{% url 'pick_room' %}">
         <button type="submit" class="applybutton applybutton1" >Pick Room</button>
         <button type="submit" formaction="{% url 'searchroom' %}" class="applybutton applybutton1" >Search Room</button>
     </form>
 </div>
-    {% endif %}
-{% if info == 'J' %}
 	<!-- Residences -->
 <div>
 <div class="destinations" id="destinations">
@@ -64,9 +65,8 @@
 						<div class="destinations_container item_grid">
 
 							{% for residence in residences %}
-                                {% for user in userinfo %}
-                                        {% if residence.classification == None or residence.classification != user.classification  %}
-                                            {% if residence.sex == user.sex or residence.sex == None %}
+                                {% if residence.classification == '' or residence.classification == userinfo.classification  %}
+                                    {% if residence.sex == userinfo.sex or residence.sex == '' %}
 							<!-- Residence hall -->
 							<div class="destination item">
 								<div class="destination_image">
@@ -82,10 +82,10 @@
 									<div class="destination_price">From ${{residence.price}}</div>
 								</div>
 							</div>
+
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
-							{% endfor %}
 
 						</div>
 					</div>
@@ -95,11 +95,11 @@
     </div>
 
 {% else %}
-
+<div class="destinations">
 <form action="{% url 'apply' %}" method = 'POST' style="border:1px solid #ccc" onsubmit="someFunction(this);return false">
   <div id="container">
     <h1>{{school}} housing Information</h1>
-    <h5>Looks Like you are a first time user- No worries! we will need a little information before proceeding</h5>
+    <h5>Looks Like you are a first time user- No worries! we will need a little information before proceeding. Contact Administrator </h5>
     <hr>
      {% csrf_token %}
       <div id ="taken">
@@ -166,6 +166,13 @@
     </div>
   </div>
 </form>
+    {% endif %}
+    {% else %}
+    <div class="destinations">
+        <h2>Please Login/register to apply</h2>
+    </div>
+</div>
+
 
  {% endif %}
 {% endblock %}

@@ -29,10 +29,10 @@
 
 
 
-/* Create four equal columns that floats next to each other */
+/* Create 3 equal columns that floats next to each other */
 .column1,.column2,.column3 {
   float: left;
-  width: 31.6%;
+  width: 32.6%;
   padding: 10px;
 
 }
@@ -104,4 +104,13 @@
   width: 40%;
   margin: 0 auto;
   padding: 20px;
+}
+
+
+
+.wcolumn1,.wcolumn2,.wcolumn3,.wcolumn1,.wcolumn2,.wcolumn3 {
+  float: left;
+  width: 16.6%;
+  padding: 10px;
+
 }

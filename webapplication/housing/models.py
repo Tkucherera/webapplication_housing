@@ -43,7 +43,7 @@ class Rooms(models.Model):
 
 
 class UserInfo(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     classification = models.TextField()
     sex = models.TextField()
     sport = models.TextField(blank=True)
