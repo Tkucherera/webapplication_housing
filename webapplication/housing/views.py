@@ -4,11 +4,16 @@ from django.contrib.auth.models import User, auth
 from django.db.models import Q
 from .filters import *
 from django.contrib import messages
+from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 
 
 def home(request):
     residences = Residence.objects.all
-    return render(request, 'home.html', {'residences': residences})
+    mySlides = MySlide.objects.all
+    return render(request, 'home.html', {'residences': residences, 'mySlides': mySlides})
 
 
 def about(request):
@@ -32,6 +37,31 @@ def news(request):
 
 
 def issues(request):
+    if request.method == 'POST':
+        user_id = request.user.id
+        fullname = request.user.get_full_name
+        room = Rooms.objects.get(id=user_id)
+        building = room.residence.name
+        suit = room.suit_num
+        letter = room.room_letter
+        email = request.user.email
+        service = request.POST['service']
+        problem_text = request.POST['problem']
+
+        #variables to be parsed in email template
+        context = {'service': service, 'fullname': fullname, 'building': building, 'suit': suit, 'letter': letter, 'email': email, 'problem': problem_text}
+
+        #parameters for send mail
+        subject = 'Report problem to ', service
+        html_message = render_to_string('email.html', context)
+        plain_message = strip_tags(html_message)
+        from_email = 'tinashedeveloper@gmail.com'
+        to = 'liwodo1448@hafutv.com' #the email for either MPI, RA or IT
+        mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message, fail_silently=False)
+
+        return render(request, 'thank_you.html')
+
+
     return render(request, 'Report_issue.html')
 
 
@@ -90,7 +120,8 @@ def thank_you(request):
     if request.method == 'POST':
         user = request.user.id
         reserve_room = request.POST['reserve']
-        if User.objects.filter(id=user).exists():
+        #checking if user has room already reserved
+        if Rooms.objects.filter(id=user).exists():
             messages.info(request, 'Your Already have a Room Reserved')
             return render(request, 'thank_you.html')
 

@@ -13,25 +13,56 @@
 <body>
 
 <div class="container">
+    {% if user.is_authenticated %}
     <h3>Now you can report a problem with just the click of button</h3>
-    <form action="{% url 'issues' %}">
+    <form action="{% url 'issues' %}" method="get">
+      <p>
         <button type="submit" class="applybutton applybutton1" value="wifi"  name="wifi">Wifi</button>
         <button type="submit" class="applybutton applybutton1" value="cable"  name="cable" >Cable</button>
         <button type="submit" class="applybutton applybutton1" value="utility"  name="utility"  >Utilities</button>
+      </p>
     </form>
 
 
 <div>
     <h3>If you have another problem write it in textbox</h3>
-    <form action="#" method="get">
+    <form action="{% url 'issues' %}" method="POST">
+        {% csrf_token %}
+        <p>
+        Select who you need help from
+        <br/>
+        <label>
+            <input type="radio" name="service" value="MPI"/>
+            MPI
+        </label>
+        <label>
+            <input type="radio" name="service" value="IT"/>
+            IT
+        </label>
+        <label>
+            <input type="radio" name="service" value="RA"/>
+            RA
+        </label>
+        </p>
+        <p>
         <label for="problem">
-            Problem
+            Problem:
         </label></br>
         <textarea rows="6" cols="60" id="problem" name="problem" placeholder="Write in this area"></textarea>
         <input type="submit" value="Submit">
+        </p>
     </form>
 </div>
 </div>
+        {% else %}
+        <h1>Please Log in </h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">register</a></li>
+        </ul>
+    </nav>
+{% endif %}
 {% endblock %}
 </body>
 </html>
