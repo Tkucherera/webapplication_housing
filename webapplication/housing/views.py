@@ -96,7 +96,8 @@ def apply(request):
         if UserInfo.objects.filter(user=user_id).exists():
             info = 'J'
             residences = Residence.objects.all
-            usersinfo = UserInfo.objects.get(user=user_id)
+            #get thr infomation of currently logged in user
+            usersinfo = UserInfo.objects.filter(id=user_id)
             return render(request, 'apply.html', {'residences': residences, 'info': info, 'userinfo': usersinfo})
 
     #when user inputs data for userinfor table
