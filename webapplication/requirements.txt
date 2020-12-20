@@ -10,5 +10,4 @@ psycopg2==2.8.6
 pytz==2020.4
 six==1.15.0
 sqlparse==0.4.1
-virtualenv==20.2.1
-virtualenvwrapper-win==1.2.6
+whitenoise==5.2.0
