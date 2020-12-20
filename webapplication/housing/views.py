@@ -97,8 +97,7 @@ def apply(request):
             info = 'J'
             residences = Residence.objects.all
             #get thr infomation of currently logged in user
-            usersinfo = UserInfo.objects.filter(user=user_id)
-            return render(request, 'apply.html', {'residences': residences, 'info': info, 'userinfo': usersinfo})
+            return render(request, 'apply.html', {'residences': residences, 'info': info})
 
     #when user inputs data for userinfor table
     if request.method == 'POST':
