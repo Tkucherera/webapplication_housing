@@ -1,0 +1,22 @@
+{% load static %}
+{% load bootstrap %}
+{% static "images" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thank You</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/pick_room.css' %}">
+</head>
+<body>
+
+<div class="container">
+    {% for message in messages %}
+        <h1>{{user.name}} {{message}}</h1>
+    {% endfor %}
+
+    <h1> Thank you </h1>
+    <p><h3> Thank you for reserving room we have sent an email to you with information of how to proceed</h3></p>
+</div>
+</body>
+</html>

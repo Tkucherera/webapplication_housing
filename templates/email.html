@@ -1,0 +1,55 @@
+{% load static %}
+{% load bootstrap %}
+{% static "images" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <style>
+        body {
+            background-color: #FBFAF4;
+            font-family: "Proxima Nova", Helvetica, Arial, san-serif;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+        }
+        h1 {
+            background-color: midnightblue;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        p {
+           background-color: white;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+      <div>
+        <h1>SAU HOUSING</h1>
+        <p>Dear {{service}}</p>
+        <p>
+           Name: {{fullname}}<br/>
+           Building: {{building}}<br/>
+           Room: {{suit}}{{letter}}<br/>
+           Email: {{email}}
+        </p>
+          <p>
+              The above mentioned student has a problem in their room that requires your attention. below it the message
+              they left. Please feel free to reach out to student for further information.
+          </p>
+          <p>{{problem}}</p>
+</div>
+
+</div>
+</div>
+</div>
+</body>
+</html>

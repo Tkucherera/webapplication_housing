@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+{% static "images" as baseUrl %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search</title>
+
+
+</head>
+<body>
+
+
+{% csrf_token %}
+<div class="super_container">
+<h1>Search Page</h1>
+		<!-- Search -->
+
+
+                <div class="container">
+				    <div class="row">
+					    <div class="col">
+							<div class="home_search_title">Search for your room</div>
+							    <div class="home_search_content">
+								    <form action="{% url 'searchroom' %}" method="GET">
+                                        <input name="suit_num" type="text" value="{{request.GET.suit_num}}" class="search_input search_input_2" placeholder="suit number">
+                                        <input type="submit" name="submit" value="Search"/>
+								    </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+{% if submitbutton == 'Search' and request.GET.suit_num != '' %}
+{% if results %}
+<h1>Results for <b>{{ user.username }}</b></h1>
+<br/><br/>
+    {% for result in results %}
+
+
+    <br/>
+
+    Building: {{result.residence.name}}|Suit Number:{{result.suit_num}} |Available: {{result.Availability}} | <form action='reserveroom' method=POST>
+<button id="approve-btn" type="submit">Reserve</button>
+</form>
+    <br/>
+{%endfor%}
+{% else %}
+No search results for this query
+{% endif %}
+{% endif %}
+
+{% endblock %}
+</div>
+</body>
+</html>
