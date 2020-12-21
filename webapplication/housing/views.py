@@ -40,7 +40,11 @@ def issues(request):
     if request.method == 'POST':
         user_id = request.user.id
         fullname = request.user.get_full_name
-        room = Rooms.objects.get(occupant_id=user_id)
+        try:
+            room = Rooms.objects.get(occupant_id=user_id)
+        except Rooms.DoesNotExist:
+            room = None
+
         building = room.residence.name
         suit = room.suit_num
         letter = room.room_letter
