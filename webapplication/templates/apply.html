@@ -65,6 +65,7 @@
 						<div class="destinations_container item_grid">
 
 							{% for residence in residences %}
+                                {% residence.classification == " " or residence.classification == userinfo.classification%}
 							<!-- Residence hall -->
 							<div class="destination item">
 								<div class="destination_image">
@@ -81,7 +82,7 @@
 								</div>
 							</div>
 
-                                        
+                                    {% endif %}
                                 {% endfor %}
 
 						</div>

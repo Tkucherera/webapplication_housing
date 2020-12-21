@@ -40,7 +40,7 @@ def issues(request):
     if request.method == 'POST':
         user_id = request.user.id
         fullname = request.user.get_full_name
-        room = Rooms.objects.get(id=user_id)
+        room = Rooms.objects.get(occupant_id=user_id)
         building = room.residence.name
         suit = room.suit_num
         letter = room.room_letter
@@ -93,11 +93,15 @@ def apply(request):
     user = request.user
     user_id = user.id
     if request.user.is_authenticated:
-        if UserInfo.objects.filter(user=user_id).exists():
+        if UserInfo.objects.filter(user_id=user_id).exists():
             info = 'J'
             residences = Residence.objects.all
+            try:
+                user_info = UserInfo.objects.get(user_id=user_id)
+            except UserInfo.DoesNotExist:
+                user_info = None
             #get thr infomation of currently logged in user
-            return render(request, 'apply.html', {'residences': residences, 'info': info})
+            return render(request, 'apply.html', {'residences': residences, 'info': info, 'userinfo': user_info})
 
     #when user inputs data for userinfor table
     if request.method == 'POST':
