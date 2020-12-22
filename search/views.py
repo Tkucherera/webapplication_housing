@@ -3,23 +3,19 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.apps import apps
 
+
 rooms = apps.get_model('housing', 'Rooms')
 
 def searchroom(request):
-    if request.method == 'GET':
-        query_residence = str(request.GET.get('residence'))
-        query_suite = request.GET.get('suit_num')
+    if request.method == 'POST':
+        residence = int(request.POST['residence'])
+        suite = request.POST['suit_num']
         query_room_letter = request.GET.get('room_letter')
-        residence = apps.get_model('housing', 'Residence')
 
-        submitbutton = request.GET.get('submit')
 
-        if query_suite is not None:
-            lookups = Q(suit_num__icontains=query_suite)
-            results = rooms.objects.filter(lookups).distinct()
-            context = {'results': results,
-                     'submitbutton': submitbutton}
-
+        if residence is not None:
+            results = rooms.objects.filter(residence_id=residence, suit_num=suite)
+            context = {'results': results}
             return render(request, 'searchroom.html', context)
 
         else:

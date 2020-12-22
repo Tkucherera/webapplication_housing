@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 
 
 def register(request):
@@ -21,6 +25,16 @@ def register(request):
         else:
             user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name)
             user.save()
+            context = {'first_name': first_name}
+
+            # parameters for send mail
+            subject = 'Account Created'
+            html_message = render_to_string('register_email.html', context)
+            plain_message = strip_tags(html_message)
+            from_email = 'tinashedeveloper@gmail.com'
+            to = email  # the email for ne user
+            mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message, fail_silently=False)
+
             return redirect('login')
     else:
         return render(request, 'register.html', {'school': 'Falcon Nation'})

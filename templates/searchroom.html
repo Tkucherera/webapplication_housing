@@ -8,15 +8,16 @@
 <head>
     <meta charset="UTF-8">
     <title>search</title>
-
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/pick_room.css' %}">
 
 </head>
 <body>
 
 
-{% csrf_token %}
 <div class="super_container">
 <h1>Search Page</h1>
+
+
 		<!-- Search -->
 
 
@@ -25,9 +26,22 @@
 					    <div class="col">
 							<div class="home_search_title">Search for your room</div>
 							    <div class="home_search_content">
-								    <form action="{% url 'searchroom' %}" method="GET">
-                                        <input name="suit_num" type="text" value="{{request.GET.suit_num}}" class="search_input search_input_2" placeholder="suit number">
-                                        <input type="submit" name="submit" value="Search"/>
+								    <form action="{% url 'searchroom' %}" method="POST">
+                                       {% csrf_token %}
+                                        <!-- filter -->
+                                        <label for="residences"><b>Residence..............</b></label>
+                                            <input list="residences" id="residenc" name="residence" multiple="multiple" style="width: 100px;" required>
+                                                <datalist id="residences">
+                                                    <option value="3">Latham</option>
+                                                    <option value="2">Weston</option>
+                                                    <option value="5">Boyer</option>
+                                                    <option value="4">Falcrest A</option>
+                                                    <option value="1" >Falcrest B</option>
+
+    </datalist>
+                                       <label for="suit_num"><b>Suit number</b></label>
+                                            <input type="number" placeholder="suit number" name="suit_num" >
+                                            <button type="submit" class="submit">Submit</button>
 								    </form>
 
                             </div>
@@ -36,24 +50,49 @@
                 </div>
 
 
-{% if submitbutton == 'Search' and request.GET.suit_num != '' %}
 {% if results %}
-<h1>Results for <b>{{ user.username }}</b></h1>
+<h1>Thank You <b>{{ user.username }}</b></h1>
 <br/><br/>
-    {% for result in results %}
+
+<h3>Your search results</h3>
 
 
     <br/>
+<table id="pickroom">
+    <th>Building</th>
+    <th>Suit #</th>
+    <th>Room/Bed letter</th>
+    <th>Room Available</th>
+    <th>Reserve</th>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{result.residence.name}}</td>
+                        <td>{{result.suit_num}}</td>
+                        <td>{{result.room_letter}}</td>
+                        <td>{{result.Availability}}</td>
 
-    Building: {{result.residence.name}}|Suit Number:{{result.suit_num}} |Available: {{result.Availability}} | <form action='reserveroom' method=POST>
-<button id="approve-btn" type="submit">Reserve</button>
-</form>
+                        <form action="{% url 'thank_you' %}" method="POST">
+                            {% csrf_token %}
+
+                            <td>
+                                {% if result.Availability %}
+                                <button name="reserve" value="{{room.id}}">reserve room</button>
+                                {% else %}
+                                Not available
+                                {% endif %}
+                            </td>
+
+                        </form>
+                    </tr>
+                    {%endfor%}
+                </table>
+
     <br/>
-{%endfor%}
+
 {% else %}
 No search results for this query
 {% endif %}
-{% endif %}
+
 
 {% endblock %}
 </div>
