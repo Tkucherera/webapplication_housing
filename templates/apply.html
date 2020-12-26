@@ -27,7 +27,6 @@
     {% if user.is_authenticated %}
     <li><a href="{% url 'home' %}">Home</a></li>
     <li><a href="{% url 'logout' %}">Logout</a></li>
-    <li><a href="{% url 'searchroom' %}">search room</a></li>
         <li><a href="#">Welcome {{user.username}}</a></li>
     {% else%}
   <li><a href="{% url 'home' %}">Home</a></li>
@@ -74,7 +73,7 @@
 
 								</div>
 								<div class="destination_content">
-									<div class="destination_title"><a href="{% url 'pick_room' %}">{{residence.name}}</a>
+									<div class="destination_title"><a href="{% url 'falcrestA' %}">{{residence.name}}</a>
 									</div>
 									<div class="destination_subtitle">
 										<p>{{residence.desc}}</p>

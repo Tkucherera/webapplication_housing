@@ -121,12 +121,88 @@ def thank_you(request):
         reserve_room = request.POST['reserve']
         #checking if user has room already reserved
         if Rooms.objects.filter(occupant=user).exists():
-            messages.info(request, 'Your Already have a Room Reserved')
+            messages.info(request, 'You Already have a Room Reserved')
+            return render(request, 'thank_you.html')
+        else:
+            messages.info(request, 'Thank You your room has been reserved')
+            Rooms.objects.filter(id=reserve_room).update(Availability=False, occupant=user)
             return render(request, 'thank_you.html')
 
-        Rooms.objects.filter(id=reserve_room).update(Availability=False, occupant=user)
-        return render(request, 'thank_you.html')
+
+def falcretA(request):
+    first = Q(floor__floor__contains=1)
+    second = Q(floor__floor__contains=2)
+    third = Q(floor__floor__contains=3)
+    first_rooms = Rooms.objects.filter(first)
+    second_rooms = Rooms.objects.filter(second)
+    third_rooms = Rooms.objects.filter(third)
+    results = {'first_rooms': first_rooms, 'second_rooms': second_rooms, 'third_rooms': third_rooms}
+
+    return render(request, 'FalcrestA.html', results)
+
+def falcretB(request):
+    first = Q(floor__floor__contains=1)
+    second = Q(floor__floor__contains=2)
+    third = Q(floor__floor__contains=3)
+    first_rooms = Rooms.objects.filter(first)
+    second_rooms = Rooms.objects.filter(second)
+    third_rooms = Rooms.objects.filter(third)
+    results = {'first_rooms': first_rooms, 'second_rooms': second_rooms, 'third_rooms': third_rooms}
+
+    return render(request, 'FalcrestB.html', results)
+
+def falcretC(request):
+    first = Q(floor__floor__contains=1)
+    second = Q(floor__floor__contains=2)
+    third = Q(floor__floor__contains=3)
+    first_rooms = Rooms.objects.filter(first)
+    second_rooms = Rooms.objects.filter(second)
+    third_rooms = Rooms.objects.filter(third)
+    results = {'first_rooms': first_rooms, 'second_rooms': second_rooms, 'third_rooms': third_rooms}
+
+    return render(request, 'FalcrestC.html', results)
+
+def falcretD(request):
+    first = Q(floor__floor__contains=1)
+    second = Q(floor__floor__contains=2)
+    third = Q(floor__floor__contains=3)
+    first_rooms = Rooms.objects.filter(first)
+    second_rooms = Rooms.objects.filter(second)
+    third_rooms = Rooms.objects.filter(third)
+    results = {'first_rooms': first_rooms, 'second_rooms': second_rooms, 'third_rooms': third_rooms}
+
+    return render(request, 'FalcrestD.html', results)
 
 
+def latham(request):
+    first = Q(floor__floor__contains=1)
+    second = Q(floor__floor__contains=2)
+    third = Q(floor__floor__contains=3)
+    first_rooms = Rooms.objects.filter(first)
+    second_rooms = Rooms.objects.filter(second)
+    third_rooms = Rooms.objects.filter(third)
+    results = {'first_rooms': first_rooms, 'second_rooms': second_rooms, 'third_rooms': third_rooms}
 
+    return render(request, 'Latham.html', results)
 
+def weston(request):
+    first = Q(floor__floor__contains=1)
+    second = Q(floor__floor__contains=2)
+    third = Q(floor__floor__contains=3)
+    first_rooms = Rooms.objects.filter(first)
+    second_rooms = Rooms.objects.filter(second)
+    third_rooms = Rooms.objects.filter(third)
+    results = {'first_rooms': first_rooms, 'second_rooms': second_rooms, 'third_rooms': third_rooms}
+
+    return render(request, 'Weston.html', results)
+
+def boyer(request):
+    first = Q(floor__floor__contains=1)
+    second = Q(floor__floor__contains=2)
+    third = Q(floor__floor__contains=3)
+    first_rooms = Rooms.objects.filter(first)
+    second_rooms = Rooms.objects.filter(second)
+    third_rooms = Rooms.objects.filter(third)
+    results = {'first_rooms': first_rooms, 'second_rooms': second_rooms, 'third_rooms': third_rooms}
+
+    return render(request, 'Boyer.html', results)

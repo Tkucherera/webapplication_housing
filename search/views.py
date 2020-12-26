@@ -10,7 +10,7 @@ def searchroom(request):
     if request.method == 'POST':
         residence = int(request.POST['residence'])
         suite = request.POST['suit_num']
-        query_room_letter = request.GET.get('room_letter')
+
 
 
         if residence is not None:
@@ -25,10 +25,5 @@ def searchroom(request):
         return render(request, 'searchroom.html')
 
 
-def reserveroom(request):
-    if request.method == 'POST':
-        room_taken=rooms.objects.filter(availability=request.availability).update(level=False)
-        room_taken.save()
-        return render(request, 'searchroom.html')
 
 

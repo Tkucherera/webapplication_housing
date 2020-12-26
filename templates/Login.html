@@ -16,10 +16,10 @@
 </head>
 <body>
 {% block content %}
-<form action="login" method = 'post' style="border:1px solid #ccc">
+<form action="{% url 'login' %}" method = 'post' style="border:1px solid #ccc">
+    {% csrf_token %}
   <div id="container">
   <ul>
-    <li><a href="{% url 'home' %}">Home</a></li>
     <li><a href="{% url 'register' %}">SignUp</a></li>
 
   </ul>

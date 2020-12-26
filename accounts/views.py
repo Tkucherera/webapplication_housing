@@ -35,7 +35,7 @@ def register(request):
             to = email  # the email for ne user
             mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message, fail_silently=False)
 
-            return redirect('login')
+            return redirect('home')
     else:
         return render(request, 'register.html', {'school': 'Falcon Nation'})
 

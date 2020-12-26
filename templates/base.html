@@ -18,18 +18,18 @@
       <li><a href="{% url 'home' %}">Home</a></li>
       <li><a href="/residences">Residences</a>
         <ul>
-          <li><a href="">Latham</a></li>
-          <li><a href="{% static '#' %}">Falcrest</a>
+          <li><a href="{% url 'latham' %}">Latham</a></li>
+          <li><a href="">Falcrest</a>
             <ul>
-              <li><a href="">Building A (701)</a></li>
-              <li><a href="">Building B (711)</a></li>
-              <li><a href="">Building C (721)</a></li>
-              <li><a href="">Building D (731)</a></li>
+              <li><a href="{% url 'falcrestA' %}">Building A (701)</a></li>
+              <li><a href="{% url 'falcrestB' %}">Building B (711)</a></li>
+              <li><a href="{% url 'falcrestC' %}">Building C (721)</a></li>
+              <li><a href="{% url 'falcrestD' %}">Building D (731)</a></li>
             </ul>
           </li>
-          <li><a href="">Weston</a>
+          <li><a href="{% url 'weston' %}">Weston</a>
           </li>
-          <li><a href="">Boyer</a></li>
+          <li><a href="{% url 'boyer' %}">Boyer</a></li>
         </ul>
       </li>
       <li>
@@ -41,6 +41,14 @@
       </li>
       <li><a href="/apply">Apply</a></li>
       <li><a href="/issue">Report Issue (Maintenance)</a></li>
+       {% if user.is_authenticated %}
+    <li><a href="{% url 'logout' %}">Logout</a></li>
+        <li><a href="#">Welcome {{user.username}}</a></li>
+    {% else%}
+  <li><a href="{% url 'login' %}">Login</a></li>
+  <li><a href="{% url 'register' %}">register</a></li>
+
+    {% endif %}
 
     </ul>
   </nav>
