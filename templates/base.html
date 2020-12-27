@@ -5,13 +5,34 @@
 <head>
 
   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,300italic,400italic,600italic,600' rel='stylesheet' type='text/css'>
-  <link rel="Stylesheet" href="{% static 'CSS/home.css'%}" type="text/css" />
+  <link rel="Stylesheet" href="{% static 'CSS/home.css' %}" type="text/css" />
   <link rel="Stylesheet" href='https://ianlunn.github.io/Hover/css/hover.css' type="text/css" />
   <link rel="Stylesheet" href='https://fonts.googleapis.com/css?family=Muli' type='text/css'>
+<style>
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: midnightblue;
+  color: white;
 
+}
+
+p {
+padding: 2px;
+background-color: white;
+}
+
+.block {
+padding: 20px;
+background-color: #6495ED;
+color: white
+
+}
+</style>
 </head>
 
 <body>
+<div>
   <nav>
     <ul>
 
@@ -56,15 +77,24 @@
 <ul class="centernav">
   <img class="logo" src="{% static 'images/saulogo.png' %}">
   <li><a href="{% url 'home' %}">Home</a></li>
-  <li><a href="/about">About</a></li>
-  <li><a href="/athletes">Athletes</a></li>
+  <li><a href="https://www.st-aug.edu/about-us/">About</a></li>
+  <li><a href="https://saintaugfalcons.com/index.aspx">Athletes</a></li>
   <li><a href="/honors">Honors College</a></li>
   <li><a href="/news">News</a></li>
 </ul>
+  </div>
+
+
 {% block content%}
 
   {% endblock %}
+<div>
+  <footer>
+        &copy; Copyright 2021  Tinashe Kucherera
+</footer>
+</div>
 
 </body>
+
 
 </html>

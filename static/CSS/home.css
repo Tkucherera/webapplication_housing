@@ -195,16 +195,31 @@ nav ul ul ul {
     margin-top: 15px;
 }
 
+.mySlides
+
 
 #container{
 width: 60%;
 margin: 0 auto;
+}
+
+p {
+padding: 2px;
+background-color: white;
+}
+
+.block {
+padding: 20px;
+background-color: black;
+
+}
+
 
 .gallery {
   margin: 5px;
   border: 1px solid #ccc;
   float: left;
-  width: 180px;
+  width: 32.1%;
 }
 
 .gallery:hover {
@@ -219,8 +234,30 @@ margin: 0 auto;
 .desc {
   padding: 15px;
   text-align: center;
-
 }
+
+.content{
+  height: 400px;
+  width: 750px;
+  overflow: hidden;
+  box-shadow: 1px 1px 15px rgba(0,0,0,0.4);
+}
+.content .images{
+  height: 100%;
+  width: 100%;
+}
+.images img{
+  height: 100%;
+  width: 100%;
+}
+
+footer {
+  text-align: center;
+  padding: 3px;
+  background-color: DarkSalmon;
+  color: white;
+}
+
 .responsive {
   padding: 0 6px;
   float: left;
@@ -246,17 +283,12 @@ margin: 0 auto;
   clear: both;
 }
 
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: black;
-  padding: 20px;
+footer {
   text-align: center;
+  padding: 3px;
+  background-color: DarkSalmon;
   color: white;
 }
-
 @-webkit-keyframes opacity {
   0% {
     opacity: 0;

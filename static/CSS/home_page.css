@@ -1,36 +1,10 @@
-.gallery {
-  margin: 5px;
-  border: 1px solid #ccc;
-  float: left;
-  width: 32.1%;
+p {
+padding: 2px;
+color: white;
 }
 
-.gallery:hover {
-  border: 1px solid #777;
-}
+.block {
 
-.gallery img {
-  width: 100%;
-  height: auto;
+padding:6px;
+color: black;
 }
-
-.desc {
-  padding: 15px;
-  text-align: center;
-}
-
-.content{
-  height: 400px;
-  width: 750px;
-  overflow: hidden;
-  box-shadow: 1px 1px 15px rgba(0,0,0,0.4);
-}
-.content .images{
-  height: 100%;
-  width: 100%;
-}
-.images img{
-  height: 100%;
-  width: 100%;
-}
-

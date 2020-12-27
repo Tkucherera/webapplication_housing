@@ -3,39 +3,33 @@
 {% static "images" as baseUrl %}
 <!DOCTYPE html>
 <html lang="en">
-{% block content %}
+
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="Stylesheet" href="{% static 'CSS/home_page.css'%}" type="text/css" />
     <style>
-        .mySlides
+
     </style>
 </head>
-<body>
+{% block content %}
 
+<p>
 
     <div >
         {% for slide in mySlides %}
         <img class="mySlides" src="{{slide.img.url}}" style="width:100%" style="height:800">
         {% endfor %}
     </div>
+<p>
+    <div id="container">
+        <div class="block">
+            <h3>
+                Pay your Housing fee
+            </h3>
+        </div>
+    </div>
+<p>
 
-
-<div id="container">
-    <h3>Applications for Fall 2021 now open</h3>
-
-    {% for residence in residences %}
-  <div class="gallery">
-    <a target="_blank" href="img_5terre.jpg">
-        <img src={{residence.img.url}} alt="Cinque Terre" width="600" height="400">
-    </a>
-    <div class="desc">Add a description of the image here</div>
-  </div>
-
-
-  {% endfor %}
-</div>
 
 
 
