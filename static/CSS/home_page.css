@@ -1,10 +1,22 @@
+.wrapper {
+width: 60%;
+margin: 0 auto;
+}
+
 p {
 padding: 2px;
-color: white;
+background-color: white;
+color: black;
 }
 
 .block {
+padding: 20px;
+background-color: #6495ED;
 
-padding:6px;
-color: black;
 }
+
+footer {
+  text-align: center;
+  padding: 40px;
+  background-color: midnightblue;
+  color: white;

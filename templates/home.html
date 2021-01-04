@@ -1,31 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 {% static "images" as baseUrl %}
-<!DOCTYPE html>
 <html lang="en">
-
+{% block content %}
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <style>
 
-    </style>
 </head>
-{% block content %}
+<body>
+
 
 <p>
 
-    <div >
+    <div>
         {% for slide in mySlides %}
         <img class="mySlides" src="{{slide.img.url}}" style="width:100%" style="height:800">
         {% endfor %}
     </div>
 <p>
-    <div id="container">
+    <div class="wrapper">
         <div class="block">
-            <h3>
+            <h2>
                 Pay your Housing fee
-            </h3>
+            </h2>
         </div>
     </div>
 <p>

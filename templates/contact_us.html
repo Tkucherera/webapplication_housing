@@ -6,9 +6,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
 </head>
 <body>
+{% block content %}
+<div class="contact-container">
+    <div class="block">
+        <h1 style="text-align:center">Meet our staff</h1>
+    </div>
+    <div class="grid-container">
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="{% static 'images/img_3.png' %}"  alt="Avatar" style="width:200px;height:200px;">
+            </div>
+            <div class="flip-card-back">
+                John Doe
+                <p>Dean of Housing</p>
+            </div>
+        </div>
+      </div>
+  </div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="{% static 'images/img_2.png' %}"  alt="Avatar" style="width:200px;height:200px;">
+            </div>
+            <div class="flip-card-back">
+                John Doe
+                <p>Director of Housing</p>
+            </div>
+        </div>
+      </div>
+  </div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="{% static 'images/img_1.png' %}"  alt="Avatar" style="width:200px;height:200px;">
+            </div>
+            <div class="flip-card-back">
+               John Doe
+                <p>RD Weston</p>
+            </div>
+        </div>
+      </div>
+  </div>
+  <div class="grid-item">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="img_avatar.png" alt="Avatar" style="width:200px;height:200px;">
+            </div>
+            <div class="flip-card-back">
+                John Doe
+                <p>RD Latham</p>
+            </div>
+        </div>
+      </div>
+  </div>
+  <div class="grid-item">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="img_avatar.png" alt="Avatar" style="width:200px;height:200px;">
+            </div>
+            <div class="flip-card-back">
+                John Doe
+                <p>RD boyer</p>
+            </div>
+        </div>
+      </div>
+  </div>
+  <div class="grid-item">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="img_avatar.png" alt="Avatar" style="width:200px;height:200px;">
+            </div>
+            <div class="flip-card-back">
+                John Doe
+                <p>RD Falcrest</p>
 
+            </div>
+        </div>
+      </div>
+  </div>
+  <div class="grid-item">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="{% static 'images/img.png' %}" alt="Avatar" style="width:200px;height:200px;">
+            </div>
+            <div class="flip-card-back">
+                John Doe
+                <p>RD Falcrest</p>
+
+            </div>
+        </div>
+      </div>
+  </div>
+
+</div>
+
+    <div class="block">
+        <h1>contact info</h1>
+    </div>
+    <p></p>
+
+
+</div>
+
+{% endblock %}
 </body>
 </html>

@@ -1,4 +1,21 @@
 
+
+
+/*****************
+table of contents
+1. body
+2. navigation bar
+3. home page welcome message
+4. nav bar with logo & centered
+5. slideshow
+6. body container and block
+7. image gallery
+******************/
+
+
+/******************
+body
+******************/
 html,
 body * {
   box-sizing: border-box;
@@ -7,12 +24,16 @@ body * {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
 }
 
+
+
 body {
   background: -webkit-linear-gradient(rgba(246, 247, 249, 0.8), rgba(246, 247, 249, 0.8)), url(https://upload.wikimedia.org/wikipedia/commons/8/8c/K2,_Mount_Godwin_Austen,_Chogori,_Savage_Mountain.jpg) no-repeat center center fixed;
   background:  white;
   background-size: cover;
 }
-
+/***************************
+navigation bar
+**************************/
 nav {
   width: 100%;
   height: 48px;
@@ -106,7 +127,9 @@ nav ul ul ul {
   left: 100%;
   top: 0;
 }
-
+/*************************
+home page welcome message
+**************************/
 .welcome {
   font-size: 57.6px;
   line-height: 64px;
@@ -168,6 +191,10 @@ nav ul ul ul {
   margin: 0;
 
 }
+
+/***********************************
+navigation bar with logo centered
+***********************************/
 .centernav{
     border:1px solid #ccc;
     border-width:1px 0;
@@ -195,10 +222,15 @@ nav ul ul ul {
     margin-top: 15px;
 }
 
+/****************************
+slideshow function
+****************************/
 .mySlides
 
-
-#container{
+/************************
+container block and paragraph
+************************/
+.container {
 width: 60%;
 margin: 0 auto;
 }
@@ -210,11 +242,13 @@ background-color: white;
 
 .block {
 padding: 20px;
-background-color: black;
+background-color: #6495ED;
 
 }
 
-
+/******************************
+image gallery with description
+******************************/
 .gallery {
   margin: 5px;
   border: 1px solid #ccc;
@@ -251,12 +285,14 @@ background-color: black;
   width: 100%;
 }
 
+/****************
+footer
+****************/
 footer {
   text-align: center;
-  padding: 3px;
-  background-color: DarkSalmon;
+  padding: 10px;
+  background-color: midnightblue;
   color: white;
-}
 
 .responsive {
   padding: 0 6px;
@@ -283,11 +319,7 @@ footer {
   clear: both;
 }
 
-footer {
-  text-align: center;
-  padding: 3px;
-  background-color: DarkSalmon;
-  color: white;
+
 }
 @-webkit-keyframes opacity {
   0% {

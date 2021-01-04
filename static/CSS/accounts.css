@@ -1,4 +1,7 @@
 
+/*********************
+login and register
+*********************/
 
 html,
 body * {
@@ -13,6 +16,10 @@ body {
   background:  white;
   background-size: cover;
 }
+
+/*********************
+navigation bar
+*********************/
 ul {
   list-style-type: none;
   margin: 0;
@@ -203,6 +210,9 @@ footer {
 text-align: center
 }
 
+/*********************
+page buttons if needed
+*********************/
 .applybutton {
   background-color: #4CAF50; /* Green */
   border: none;
