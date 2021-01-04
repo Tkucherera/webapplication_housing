@@ -60,7 +60,7 @@ nav ul li:hover > ul li {
 nav ul {
   margin: 0;
   list-style: none;
-  position: relative;
+  position: absolute;
   display: inline-table;
 }
 
@@ -111,7 +111,7 @@ nav ul ul {
 
 nav ul ul li {
   float: none;
-  position: relative;
+  position: absolute;
   
 }
 
@@ -149,7 +149,7 @@ home page welcome message
   line-height: 64px;
 }
 .welcome:after {
-  content: ']';
+  content: '';
   position: absolute;
   right: -30px;
   line-height: 64px;
@@ -319,85 +319,23 @@ footer {
   clear: both;
 }
 
+/*****************************
+navigation bar responsiveness
+******************************/
+/*Responsive Styles*/
+@media screen and (max-width : 760px){
+    /*Make dropdown links appear inline*/
+    nav ul {
+        position: static;
+        display: none;
+    }
+    /*Create vertical spacing*/
+    nav ul li {
+        margin-bottom: 1px;
+    }
+    /*Make all menu links full width*/
+    nav ul li, li a {
+        width: 100%;
+    }
+}
 
-}
-@-webkit-keyframes opacity {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes opacity {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@-webkit-keyframes change {
-  0% {
-    margin-top: 0;
-  }
-  15% {
-    margin-top: 0;
-  }
-  25% {
-    margin-top: -64px;
-  }
-  40% {
-    margin-top: -64px;
-  }
-  50% {
-    margin-top: -128px;
-  }
-  65% {
-    margin-top: -128px;
-  }
-  75% {
-    margin-top: -64px;
-  }
-  85% {
-    margin-top: -64px;
-  }
-  100% {
-    margin-top: 0;
-  }
-}
-@keyframes change {
-  0% {
-    margin-top: 0;
-  }
-  15% {
-    margin-top: 0;
-  }
-  25% {
-    margin-top: -64px;
-  }
-  40% {
-    margin-top: -64px;
-  }
-  50% {
-    margin-top: -128px;
-  }
-  65% {
-    margin-top: -128px;
-  }
-  75% {
-    margin-top: -64px;
-  }
-  85% {
-    margin-top: -64px;
-  }
-  100% {
-    margin-top: 0;
-  }
-}

@@ -16,7 +16,7 @@
 
 <body>
 <div>
-  <nav>
+  <nav id="mytopnav">
     <ul>
 
       <li><a href="{% url 'home' %}">Home</a></li>
@@ -76,6 +76,15 @@
 </div>
 
 </body>
-
+<script>
+function myFunction() {
+  var x = document.getElementById("mytopnav");
+  if (x.className === "nav") {
+    x.className += " responsive";
+  } else {
+    x.className = "nav";
+  }
+}
+</script>
 
 </html>
