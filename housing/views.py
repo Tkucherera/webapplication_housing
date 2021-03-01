@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+import os
 
 
 
@@ -55,8 +56,8 @@ def issues(request):
         subject = 'Report problem to ', service
         html_message = render_to_string('email.html', context)
         plain_message = strip_tags(html_message)
-        from_email = 'tinashedeveloper@gmail.com'
-        to = 'liwodo1448@hafutv.com' #the email for either MPI, RA or IT
+        from_email = os.environ.get('EMAIL_ADDRESS')
+        to = 'tinashedeveloper@gmail.com' #the email for either MPI, RA or IT
         mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message, fail_silently=False)
 
         return render(request, 'thank_you.html')

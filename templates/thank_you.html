@@ -1,8 +1,9 @@
+{% extends 'base.html' %}
 {% load static %}
 {% load bootstrap %}
 {% static "images" as baseUrl %}
-<!DOCTYPE html>
 <html lang="en">
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <title>Thank You</title>
@@ -12,9 +13,11 @@
 <body>
 
 <div class="container">
+     <h1>Thank you issue has been sent</h1>
     {% for message in messages %}
         <h1>{{user.name}} {{message}}</h1>
     {% endfor %}
 </div>
+{% endblock %}
 </body>
 </html>
