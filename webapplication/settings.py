@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'o*1am&seglv6l7g**xq#8%hs_6sw@v*8p_!(=8ft@*su_hbd6a'
+SECRET_KEY = os.environ.get('HOUSING_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
 ALLOWED_HOSTS = ['127.0.0.1', 'tomcathousing.herokuapp.com']
 
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'bootstrapform',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -82,10 +85,10 @@ WSGI_APPLICATION = 'webapplication.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbrn523b6f373i',
-        'USER': 'vrlceeyhkxvzuv',
-        'PASSWORD': '961c73a74a5a01fdfdba5e5af5f8f507514542e285fddb09793832656ed577e7',
-        'HOST': 'ec2-34-236-215-156.compute-1.amazonaws.com',
+        'NAME': os.environ.get('HOUSING_DATABASE_NAME'),
+        'USER': os.environ.get('HOUSING_DATABASE_USER'),
+        'PASSWORD': os.environ.get('HOUSING_DATABASE_PASS'),
+        'HOST': os.environ.get('HOUSING_DATABASE_HOST'),
         'PORT': '5432'
 
     }
@@ -131,15 +134,24 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+# configure django app for heroku TODO change to env variables
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME_HOUSING')
+
+AWS_S3_FILE_OVERWRITE = False   #so that uploads with the same name are not overwritten
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 #Setting up email with which will be used to send mail
 
-EMAIL_HOST ='smtp.gmail.com'
-EMAIL_PORT=465
-EMAIL_HOST_USER='tinashedeveloper@gmail.com'
-EMAIL_HOST_PASSWORD='Tinashe1234'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.environ.get('EMAIL_ADDRESS')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True

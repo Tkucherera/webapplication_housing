@@ -17,6 +17,9 @@ class Residence(models.Model):
     sport = models.TextField(blank=True)
     honors = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.name
+
 #the floors in the residence halls
 
 
@@ -27,6 +30,9 @@ class Floors(models.Model):
     sex = models.TextField(blank=True)
     Eligibility2 = models.TextField(blank=True)
     Eligibility3 = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.residence.name + ' floor ' + str(self.floor)
 
 
 class Rooms(models.Model):
@@ -41,6 +47,9 @@ class Rooms(models.Model):
     Eligibility3 = models.TextField(blank=True)
     occupant = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return str(self.residence.name) + ' suit/room ' + str(self.suit_num) + self.room_letter
+
 
 class UserInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -51,11 +60,17 @@ class UserInfo(models.Model):
     age = models.IntegerField()
     gpa = models.DecimalField(max_digits=3, decimal_places=2)
 
+    def __str__(self):
+        return self.user.last_name
+
 
 class MySlide(models.Model):
     name = models.CharField(max_length=100)
     img = models.ImageField(upload_to='pics')
     description = models.TextField()
+
+    def __str__(self):
+        return self.name
 
 
 
